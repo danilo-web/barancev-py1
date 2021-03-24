@@ -10,16 +10,17 @@ class AddUser(unittest.TestCase):
         self.wd.implicitly_wait(30)
 
     def test_add_user(self):
-        wd = self.wd
-        self.open_homepage(wd, "http://localhost/addressbook/index.php")
-        self.login(wd, username="admin", password="secret")
-        self.create_user(wd, User(name="Mike", last_name="Sboev", phone="5555555"))
-        self.logout(wd)
+        self.open_homepage("http://localhost/addressbook/index.php")
+        self.login(username="admin", password="secret")
+        self.create_user(User(name="Mike", last_name="Sboev", phone="5555555"))
+        self.logout()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def create_user(self, wd, user):
+    def create_user(self, user):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -32,7 +33,8 @@ class AddUser(unittest.TestCase):
         wd.find_element_by_name("mobile").send_keys(user.phone)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -40,7 +42,8 @@ class AddUser(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_homepage(self, wd, homepage_url):
+    def open_homepage(self, homepage_url):
+        wd = self.wd
         wd.get(homepage_url)
 
     def tearDown(self):
