@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
+from group import Group
 
 
 class TestAddGroup(unittest.TestCase):
@@ -14,7 +15,7 @@ class TestAddGroup(unittest.TestCase):
         wd = self.wd
         self.open_homepage(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_group(wd, group_name="test", group_header="test", group_footer="test")
+        self.create_group(wd, Group(name="test", header="test", footer="test"))
         self.retern_to_group_page(wd)
         self.logout(wd)
 
@@ -22,7 +23,7 @@ class TestAddGroup(unittest.TestCase):
         wd = self.wd
         self.open_homepage(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_group(wd, group_name="test", group_header="test", group_footer="test")
+        self.create_group(wd, Group(name="", header="", footer=""))
         self.retern_to_group_page(wd)
         self.logout(wd)
 
@@ -32,17 +33,17 @@ class TestAddGroup(unittest.TestCase):
     def retern_to_group_page(self, wd):
         wd.find_element_by_link_text("groups").click()
 
-    def create_group(self, wd, group_name, group_header, group_footer):
+    def create_group(self, wd, group):
         wd.find_element_by_link_text("groups").click()
         wd.find_element_by_name("new").click()
         wd.find_element_by_xpath("//div[@id='content']/h1").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group_name)
+        wd.find_element_by_name("group_name").send_keys(group.name)
         wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group_header)
+        wd.find_element_by_name("group_header").send_keys(group.header)
         wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group_footer)
+        wd.find_element_by_name("group_footer").send_keys(group.footer)
         wd.find_element_by_name("submit").click()
 
     def login(self, wd, username, password):
@@ -71,9 +72,9 @@ class TestAddGroup(unittest.TestCase):
     #     except NoAlertPresentException as e:
     #         return False
     #     return True
-    #
-    # def tearDown(self):
-    #     self.wd.quit()
+
+    def tearDown(self):
+        self.wd.quit()
 
 
 if __name__ == "__main__":
