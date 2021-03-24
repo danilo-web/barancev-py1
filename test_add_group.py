@@ -13,24 +13,24 @@ class TestAddGroup(unittest.TestCase):
 
     def test_add_group(self):
         wd = self.wd
-        self.open_homepage(wd)
+        self.open_homepage(wd, "http://localhost/addressbook/index.php")
         self.login(wd, username="admin", password="secret")
         self.create_group(wd, Group(name="test", header="test", footer="test"))
-        self.retern_to_group_page(wd)
+        self.return_to_group_page(wd)
         self.logout(wd)
 
     def test_add_empty_group(self):
         wd = self.wd
-        self.open_homepage(wd)
+        self.open_homepage(wd, "http://localhost/addressbook/index.php")
         self.login(wd, username="admin", password="secret")
         self.create_group(wd, Group(name="", header="", footer=""))
-        self.retern_to_group_page(wd)
+        self.return_to_group_page(wd)
         self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def retern_to_group_page(self, wd):
+    def return_to_group_page(self, wd):
         wd.find_element_by_link_text("groups").click()
 
     def create_group(self, wd, group):
@@ -55,9 +55,9 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_homepage(self, wd):
+    def open_homepage(self, wd, homepage_url):
         # open homepage
-        wd.get("http://localhost/addressbook/index.php")
+        wd.get(homepage_url)
 
     # def is_element_present(self, how, what):
     #     try:
