@@ -12,7 +12,7 @@ def app(request):
 
 
 def test_add_user(app):
-    app.open_homepage("http://localhost/addressbook/index.php")
+    app.open_home_page("http://localhost/addressbook/index.php")
     app.login(username="admin", password="secret")
     app.create_user(User(name="Mike", last_name="Sboev", phone="5555555"))
     app.logout()

@@ -12,14 +12,14 @@ def app(request):
 
 
 def test_add_group(app):
-    app.open_homepage("http://localhost/addressbook/index.php")
-    app.login(username="admin", password="secret")
+    app.open_home_page("http://localhost/addressbook/index.php")
+    app.session.login(username="admin", password="secret")
     app.create_group(Group(name="test", header="test", footer="test"))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_empty_group(app):
-    app.open_homepage("http://localhost/addressbook/index.php")
-    app.login(username="admin", password="secret")
+    app.open_home_page("http://localhost/addressbook/index.php")
+    app.session.login(username="admin", password="secret")
     app.create_group(Group(name="", header="", footer=""))
-    app.logout()
+    app.session.logout()
