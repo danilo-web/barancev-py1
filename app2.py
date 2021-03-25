@@ -1,7 +1,7 @@
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-class Application:
+class Application2:
 
     def __init__(self):
         self.wd = WebDriver()
@@ -11,20 +11,19 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def create_group(self, group):
+    def create_user(self, user):
         wd = self.wd
-        wd.find_element_by_link_text("groups").click()
-        wd.find_element_by_name("new").click()
-        wd.find_element_by_xpath("//div[@id='content']/h1").click()
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
-        wd.find_element_by_name("submit").click()
-        wd.find_element_by_link_text("groups").click()
+        wd.find_element_by_link_text("add new").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(user.name)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(user.last_name)
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(user.phone)
+        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
     def login(self, username, password):
         wd = self.wd
