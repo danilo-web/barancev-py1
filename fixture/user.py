@@ -16,3 +16,12 @@ class UserHelper:
         wd.find_element_by_name("mobile").clear()
         wd.find_element_by_name("mobile").send_keys(user.phone)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+
+    def delete(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//*[@value='Delete']").click()
+        wd.implicitly_wait(2)  # is it needed?
+        wd.switch_to_alert().accept()
+        wd.find_element_by_link_text("home").click()

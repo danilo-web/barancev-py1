@@ -25,3 +25,17 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         wd.find_element_by_link_text("groups").click()
 
+    def edit(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("edit").click()
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys("AAAAAAAAA")
+        wd.find_element_by_name("group_header").clear()
+        wd.find_element_by_name("group_header").send_keys("AAAAAAAAAA")
+        wd.find_element_by_name("group_footer").clear()
+        wd.find_element_by_name("group_footer").send_keys("AAAAAAAAAAA")
+        wd.find_element_by_name("update").click()
+        wd.find_element_by_link_text("groups").click()
